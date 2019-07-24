@@ -11,7 +11,7 @@
                 </form>
 
                 <p><a href="#" onclick="confirmDestory();">この従業員情報を削除する</a></p>
-                <form method="POST" action="<c:url value='/emplyees/destroy' />">
+                <form method="POST" action="<c:url value='/employees/destroy' />">
                     <input type="hidden" name="_token" value="${_token}" />
                 </form>
                 <script>
