@@ -58,6 +58,7 @@ public class ReportsCreateServlet extends HttpServlet {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             r.setCreated_at(currentTime);
             r.setUpdated_at(currentTime);
+            r.setAttendance_time((Timestamp)request.getSession().getAttribute("attendance_time"));
 
             List<String> errors = ReportValidator.validate(r);
             if(errors.size() > 0) {

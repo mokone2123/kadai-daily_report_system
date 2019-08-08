@@ -31,6 +31,10 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyReportsCount",
             query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"
+            ),
+    @NamedQuery(
+            name = "getTodayMyReports",
+            query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.created_at < :work_time AND r.work_time IS NULL"
             )
 })
 @Entity
@@ -59,6 +63,12 @@ public class Report {
 
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
+
+    @Column(name = "attendance_time", nullable = true)
+    private Timestamp attendance_time;
+
+    @Column(name = "work_time", nullable = true)
+    private Timestamp work_time;
 
     public Integer getId() {
         return id;
@@ -114,6 +124,22 @@ public class Report {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Timestamp getAttendance_time() {
+        return attendance_time;
+    }
+
+    public void setAttendance_time(Timestamp attendance_time) {
+        this.attendance_time = attendance_time;
+    }
+
+    public Timestamp getWork_time() {
+        return work_time;
+    }
+
+    public void setWork_time(Timestamp work_time) {
+        this.work_time = work_time;
     }
 
 

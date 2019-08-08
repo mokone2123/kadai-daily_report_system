@@ -1,6 +1,7 @@
 package controllers.login;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -93,6 +94,10 @@ public class LoginServlet extends HttpServlet {
         } else {
             // 認証できたらログイン状態にしてトップページへリダイレクト
             request.getSession().setAttribute("login_employee", e);
+
+            // ログイン時間をセッションスコープに保存する。
+            Timestamp attendance_time = new Timestamp(System.currentTimeMillis());
+            request.getSession().setAttribute("attendance_time", attendance_time);
 
             request.getSession().setAttribute("flush", "ログインしました。");
             response.sendRedirect(request.getContextPath() + "/");
