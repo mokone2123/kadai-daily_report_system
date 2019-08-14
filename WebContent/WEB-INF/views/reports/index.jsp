@@ -16,6 +16,7 @@
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
+                    <th class="report_approval">承認</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <tr class="row${status.count % 2}">
@@ -23,6 +24,11 @@
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
                         <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
+                        <td class="report_approval">
+                        <c:choose>
+                            <c:when test="${report.approval_flag == true}">承認済み</c:when>
+                            <c:otherwise>未承認</c:otherwise>
+                        </c:choose>
                     </tr>
                 </c:forEach>
             </tbody>

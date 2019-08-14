@@ -47,9 +47,32 @@
                                 <fmt:formatDate value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" />
                             </td>
                         </tr>
+                        <tr>
+                            <th>承認状況</th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${report.approval_flag == true}">承認済み</c:when>
+                                    <c:otherwise>未承認</c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
+                <c:if test="${sessionScope.login_employee.admin_flag > report.employee.admin_flag && report.approval_flag != true}">
+                <p><a href="#" onclick="confirmApproval();">承認する</a></p>
+                <form method="POST" action="<c:url value='/reports/update?id=${report.id}'/>">
+                    <input type="hidden" name="_token" value="${_token}" />
+                </form>
+                <script>
+                    function confirmApproval(){
+                        if(confirm("この日報を承認しますか？")){
+                            document.forms[0].submit();
+                        }
+                    }
+                </script>
+
+                </c:if>
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <p><a href="<c:url value='/reports/edit?id=${report.id}' />">この日報を編集する</a></p>
                 </c:if>

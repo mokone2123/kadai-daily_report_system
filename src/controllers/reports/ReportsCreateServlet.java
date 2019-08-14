@@ -60,6 +60,15 @@ public class ReportsCreateServlet extends HttpServlet {
             r.setUpdated_at(currentTime);
             r.setAttendance_time((Timestamp)request.getSession().getAttribute("attendance_time"));
 
+            Employee e = (Employee)request.getSession().getAttribute("login_employee");
+
+            if(e.getAdmin_flag() == 2){
+                r.setApproval_flag(true);
+            }
+            else{
+                r.setApproval_flag(false);
+            }
+
             List<String> errors = ReportValidator.validate(r);
             if(errors.size() > 0) {
                 em.close();

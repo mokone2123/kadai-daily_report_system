@@ -69,6 +69,9 @@ public class Report {
 
     @Column(name = "work_time", nullable = true)
     private Timestamp work_time;
+    
+    @Column(name = "approval_flag", nullable = false)
+    private boolean approval_flag;
 
     public Integer getId() {
         return id;
@@ -140,6 +143,14 @@ public class Report {
 
     public void setWork_time(Timestamp work_time) {
         this.work_time = work_time;
+    }
+
+    public boolean isApproval_flag() {
+        return approval_flag;
+    }
+
+    public void setApproval_flag(boolean approval_flag) {
+        this.approval_flag = approval_flag;
     }
 
 
